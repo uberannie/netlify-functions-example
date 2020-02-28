@@ -15,8 +15,10 @@ exports.handler = async (event, context) => {
   //const roles = params.roles;
   const message = params.message;
 
+  console.log('body: `Name: ${name} email: ${email} Message: ${message}')
+  
   return {
     statusCode: 200,
-    body: `Name: ${name} email: ${email} Message: ${message}`
+    //body: `Name: ${name} email: ${email} Message: ${message}`
   };
 };
