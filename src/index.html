@@ -7,7 +7,33 @@
     <link href="/styles.css" rel="stylesheet">
   </head>
   <body>
+<h1>here is a form submission</h1>
+<form name="contact" method="POST" data-netlify="true">
+  <p>
+    <label>Your Name: <input type="text" name="name" /></label>
+  </p>
+  <p>
+    <label>Your Email: <input type="email" name="email" /></label>
+  </p>
+  <p>
+    <label>Your Role:
+      <select name="role[]" multiple>
+        <option value="leader">Leader</option>
+        <option value="follower">Follower</option>
+      </select>
+  </label>
+  </p>
+  <p>
+    <label>Message: <textarea name="message"></textarea></label>
+  </p>
+  <p>
+    <button type="submit">Send</button>
+  </p>
+</form>
+
+
     <h1>Netlify Functions Examples</h1>
+
     <p>
       Hi there! This is a playground to test out
       <a href="https://www.netlify.com/docs/functions">Netlify’s Lambda Functions</a>.
