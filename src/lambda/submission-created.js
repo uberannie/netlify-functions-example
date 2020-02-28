@@ -5,22 +5,17 @@ exports.handler = async (event, context) => {
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: "Method Not Allowed" };
   }
-  
+
   console.log(`serverless function running now`);
 
-  // When the method is POST, the name will no longer be in the event’s
-  // queryStringParameters – it’ll be in the event body encoded as a query string
-  const params = querystring.parse(event.body);
-
-  const name = params.name || "World";
-  const email = params.email;
-  //const roles = params.roles;
-  const message = params.message;
+  const email = JSON.parse(event.body).payload.email || "default email"
+  const name = JSON.parse(event.body).payload.name || "default name"
+  const message = JSON.parse(event.body).payload.message || "default message"
 
   console.log(`body: Name: ${name} email: ${email} Message: ${message}`)
-  
+
   return {
     statusCode: 200,
-    //body: `Name: ${name} email: ${email} Message: ${message}`
+    
   };
 };
