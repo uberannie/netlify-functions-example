@@ -51,12 +51,13 @@ exports.handler = async (event, context) => {
       headers: {
         Authorization: `Bearer ${API_TOKEN}`,
         'Accept': 'application/json',
-        'Content-Type': 'application/json' },
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'},
       body: JSON.stringify(intercom_search_request) }
       )
       .then(response => response.json())
       .then(data => {
-          console.log(`we got back created_at: ${data.type} id: ${data.id}`)
+          console.log(`we got back ${data.total_count } ${data.type} ${data.id}`)
         }
       )
       .catch(error => { console.log(String(error)) })
