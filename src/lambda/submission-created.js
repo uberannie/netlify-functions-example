@@ -1,9 +1,10 @@
 const fetch = require('node-fetch')
+require('dotenv').config()
 
 //const { API_TOKEN } = process.env
 // let's hard code for now
-const { API_TOKEN } = "dG9rOjExZWVjYmE5XzAxMGRfNDRhOF84NDI5XzAyNjE1MzIxMjI2OToxOjA="
-const { INTERCOM_CONVERSATION_API } = 'https://api.intercom.io/conversations'
+const { API_TOKEN } = process.env
+const { INTERCOM_CONVERSATION_API } = process.env
 exports.handler = async (event, context) => {
   // Only allow POST
   if (event.httpMethod !== "POST") {
@@ -11,6 +12,7 @@ exports.handler = async (event, context) => {
   }
 
   console.log(`serverless function running now`);
+  console.log(`Using ${ API_TOKEN } at ${ INTERCOM_CONVERSATION_API }`)
 
   const formemail = JSON.parse(event.body).payload.email;
   const email = "berau@atsx.io"
