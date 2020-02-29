@@ -12,7 +12,7 @@ exports.handler = async (event, context) => {
     return { statusCode: 405, body: "Method Not Allowed" };
   }
 
-  console.log(`going to call ${INTERCOM_CONTACT_API}`)
+  console.log(`going to call ${INTERCOM_SEARCH_CONTACT_API}`)
 
   const formemail = JSON.parse(event.body).payload.email;
   const formname = JSON.parse(event.body).payload.name;
