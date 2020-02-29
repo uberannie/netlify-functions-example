@@ -10,7 +10,7 @@ exports.handler = async (event, context) => {
   }
 
   const formemail = JSON.parse(event.body).payload.email;
-  const email = "berau@atsx.io"
+  const email = "uberstax@stax.io"
   const intercom_conversation = {
                                   "from": {
                                       "type": "user",
@@ -30,7 +30,7 @@ exports.handler = async (event, context) => {
       body: JSON.stringify(intercom_conversation) }
       )
     .then(response => response.json())
-    .then(data => {console.log(`Submitted to Intercom:\n ${data}`)})
+    .then(data => {console.log(`we got back created_at: ${data.created_at} id: ${data.id}`)})
 
     .catch(error => ({ statusCode: 422, body: String(error) }))
 
