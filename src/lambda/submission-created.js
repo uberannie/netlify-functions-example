@@ -46,7 +46,7 @@ exports.handler = async (event, context) => {
 
     console.log(JSON.stringify(intercom_search_request))
 
-  fetch(INTERCOM_SEARCH_CONTACT_API, {
+  return fetch(INTERCOM_SEARCH_CONTACT_API, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${API_TOKEN}`,
@@ -56,13 +56,10 @@ exports.handler = async (event, context) => {
       )
       .then(response => response.json())
       .then(data => {
-          intercom_user_id = data.id;
           console.log(`we got back created_at: ${data.type} id: ${data.id}`)
         }
       )
-
       .catch(error => { console.log(String(error)) })
-
 
   //console.log(JSON.stringify(intercom_conversation))
 /*
