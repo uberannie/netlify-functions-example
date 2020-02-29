@@ -34,7 +34,7 @@ exports.handler = async (event, context) => {
 
   const INTERCOM_SEARCH_FIELD = "email"
   const INTERCOM_SEARCH_OPERATOR = "="
-  const intercom_user_id = ""
+  const intercom_user = ""
 
   const intercom_search_request = {
      "query":  {
@@ -57,7 +57,7 @@ exports.handler = async (event, context) => {
       )
       .then(response => response.json())
       .then(data => {
-          console.log(JSON.stringify(data))
+          console.log(data.data["id"])
         }
       )
       .catch(error => { console.log(String(error)) })
