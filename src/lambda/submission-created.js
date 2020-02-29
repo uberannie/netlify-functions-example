@@ -52,7 +52,7 @@ exports.handler = async (event, context) => {
         Authorization: `Bearer ${API_TOKEN}`,
         'Accept': 'application/json',
         'Content-Type': 'application/json' },
-      body: JSON.stringify(intercom_search_user) }
+      body: JSON.stringify(intercom_search_request) }
       )
       .then(response => response.json())
       .then(data => {
