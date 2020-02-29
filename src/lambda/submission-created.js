@@ -19,6 +19,12 @@ exports.handler = async (event, context) => {
 
   console.log(`Received a submission: ${formemail}`)
 
+  return {
+    statusCode: 200,
+    body: `Tried to retrieve ${ API_TOKEN } at ${ INTERCOM_CONVERSATION_API }`
+  }
+
+/*
   return fetch(INTERCOM_CONVERSATION_API), {
       method: 'POST',
       headers: {
@@ -39,5 +45,5 @@ exports.handler = async (event, context) => {
             console.log(`Submitted to Intercom:\n ${data}`)
           })
   .catch(error => ({ statusCode: 422, body: String(error) }))
-
+*/
 }
