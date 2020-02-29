@@ -57,7 +57,7 @@ exports.handler = async (event, context) => {
       )
       .then(response => response.json())
       .then(data => {
-          console.log(`we got back ${data.total_count } ${data.type} ${data.id}`)
+          console.log(`we got back ${data.total_count } ${data.data.type} ${data.data.id}`)
         }
       )
       .catch(error => { console.log(String(error)) })
