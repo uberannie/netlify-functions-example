@@ -12,10 +12,10 @@ exports.handler = async (event, context) => {
 
   console.log(`serverless function running now`);
 
-  //const email = JSON.parse(event.body).payload.email;
+  const formemail = JSON.parse(event.body).payload.email;
   const email = "berau@atsx.io"
 
-  console.log(`Received a submission: ${email}`)
+  console.log(`Received a submission: ${formemail}`)
 
   return fetch(INTERCOM_CONVERSATION_API), {
       method: 'POST',
@@ -29,7 +29,7 @@ exports.handler = async (event, context) => {
             "type": "user",
             "id": email
           },
-          "body": "I just submitted a form from another site partyparty"
+          "body": `I just submitted a form for ${ formemail } from another site partyparty`
         })
     }
     .then(response => response.json())
