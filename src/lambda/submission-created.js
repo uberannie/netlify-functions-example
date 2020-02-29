@@ -15,7 +15,7 @@ exports.handler = async (event, context) => {
 
   const formemail = JSON.parse(event.body).payload.email;
   const formname = JSON.parse(event.body).payload.name;
-  const email = "uberstax@stax.io"
+  const email = "midnightemail@blah.blah"
   const intercom_conversation = {
                                   "from": {
                                       "type": "user",
@@ -29,9 +29,8 @@ exports.handler = async (event, context) => {
       	"name": formname
       }
 
-  console.log(`Received a submission: ${formemail}`)
+  console.log(`trying to submit this message ${intercom_conversation}`)
 
-/*
   return fetch(INTERCOM_CONVERSATION_API, {
       method: 'POST',
       headers: {
@@ -43,8 +42,9 @@ exports.handler = async (event, context) => {
     .then(response => response.json())
     .then(data => {console.log(`we got back created_at: ${data.created_at} id: ${data.id}`)})
 
-    .catch(error => ({ statusCode: 422, body: String(error) }))
-*/
+    .catch(error => { console.log(String(error)) })
+
+/*
 return fetch(INTERCOM_CONTACT_API, {
     method: 'POST',
     headers: {
@@ -57,5 +57,6 @@ return fetch(INTERCOM_CONTACT_API, {
   .then(data => {console.log(`we got back ${data.type} ${data.id}`)})
 
   .catch(error => { console.log(String(error)) })
+  */
 
 }
