@@ -4,6 +4,7 @@ import fetch from 'node-fetch'
 const { API_TOKEN } = process.env
 const INTERCOM_CONVERSATION_API = `${process.env.INTERCOM_API}/conversations`
 const INTERCOM_CONTACT_API = `${process.env.INTERCOM_API}/contacts`
+const INTERCOM_SEARCH_CONTACT_API = INTERCOM_CONTACT_API.concat("/search")
 
 exports.handler = async (event, context) => {
   // Only allow POST
@@ -29,8 +30,42 @@ exports.handler = async (event, context) => {
       	"name": formname
       }
 
-  console.log(`trying to submit this message ${intercom_conversation}`)
+  // need to find the Intercom generated ID for the contact
 
+  const INTERCOM_SEARCH_FIELD = "email"
+  const INTERCOM_SEARCH_OPERATOR = "="
+  const intercom_user_id = ""
+
+  const intercom_search_request = {
+     "query":  {
+        "field": INTERCOM_SEARCH_FIELD,
+        "operator": INTERCOM_SEARCH_OPERATOR,
+        "value": email
+      }
+    }
+
+    console.log(JSON.stringify(intercom_search_request))
+
+  fetch(INTERCOM_SEARCH_CONTACT_API, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${API_TOKEN}`,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json' },
+      body: JSON.stringify(intercom_search_user) }
+      )
+      .then(response => response.json())
+      .then(data => {
+          intercom_user_id = data.id;
+          console.log(`we got back created_at: ${data.type} id: ${data.id}`)
+        }
+      )
+
+      .catch(error => { console.log(String(error)) })
+
+
+  //console.log(JSON.stringify(intercom_conversation))
+/*
   return fetch(INTERCOM_CONVERSATION_API, {
       method: 'POST',
       headers: {
@@ -43,7 +78,7 @@ exports.handler = async (event, context) => {
     .then(data => {console.log(`we got back created_at: ${data.created_at} id: ${data.id}`)})
 
     .catch(error => { console.log(String(error)) })
-
+*/
 /*
 return fetch(INTERCOM_CONTACT_API, {
     method: 'POST',
