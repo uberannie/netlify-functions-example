@@ -1,5 +1,5 @@
-const fetch = require('node-fetch')
 require('dotenv').config()
+import fetch from 'node-fetch'
 
 //const { API_TOKEN } = process.env
 // let's hard code for now
@@ -16,15 +16,17 @@ exports.handler = async (event, context) => {
 
   const formemail = JSON.parse(event.body).payload.email;
   const email = "berau@atsx.io"
+  const intercom_conversation = {
+                                  "from": {
+                                      "type": "user",
+                                      "id": email
+                                    },
+                                  "body": `I just submitted a form for ${ formemail } from another site partyparty`
+                                }
 
   console.log(`Received a submission: ${formemail}`)
+  console.log(JSON.stringify(intercom_conversation)
 
-  return {
-    statusCode: 200,
-    body: `Tried to retrieve ${ API_TOKEN } at ${ INTERCOM_CONVERSATION_API }`
-  }
-
-/*
   return fetch(INTERCOM_CONVERSATION_API), {
       method: 'POST',
       headers: {
@@ -45,5 +47,5 @@ exports.handler = async (event, context) => {
             console.log(`Submitted to Intercom:\n ${data}`)
           })
   .catch(error => ({ statusCode: 422, body: String(error) }))
-*/
+
 }
