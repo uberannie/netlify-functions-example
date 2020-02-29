@@ -25,7 +25,7 @@ exports.handler = async (event, context) => {
                                 }
 
   console.log(`Received a submission: ${formemail}`)
-  console.log(JSON.stringify(intercom_conversation)
+  console.log(JSON.stringify(intercom_conversation))
 
   return fetch(INTERCOM_CONVERSATION_API), {
       method: 'POST',
