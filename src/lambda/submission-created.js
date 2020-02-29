@@ -9,9 +9,6 @@ exports.handler = async (event, context) => {
     return { statusCode: 405, body: "Method Not Allowed" };
   }
 
-  console.log(`serverless function running now`);
-  console.log(`Using ${ API_TOKEN } at ${ INTERCOM_CONVERSATION_API }`)
-
   const formemail = JSON.parse(event.body).payload.email;
   const email = "berau@atsx.io"
   const intercom_conversation = {
@@ -23,7 +20,6 @@ exports.handler = async (event, context) => {
                                 }
 
   console.log(`Received a submission: ${formemail}`)
-  console.log(JSON.stringify(intercom_conversation))
 
   return fetch(INTERCOM_CONVERSATION_API, {
       method: 'POST',
@@ -34,10 +30,7 @@ exports.handler = async (event, context) => {
       body: JSON.stringify(intercom_conversation) }
       )
     .then(response => response.json())
-    .then(data => ({
-          statusCode: 200,
-          body: intercom_conversation
-          }))
+    .then(data => {console.log(`Submitted to Intercom:\n ${data}`)})
 
     .catch(error => ({ statusCode: 422, body: String(error) }))
 
