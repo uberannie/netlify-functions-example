@@ -2,14 +2,16 @@ require('dotenv').config()
 import fetch from 'node-fetch'
 
 const { API_TOKEN } = process.env
-const { INTERCOM_CONVERSATION_API } = `${process.env}/conversations`
-const { INTERCOM_CONTACT_API } = `${process.env}/contacts`
+const INTERCOM_CONVERSATION_API = `${process.env.INTERCOM_API}/conversations`
+const INTERCOM_CONTACT_API = `${process.env.INTERCOM_API}/contacts`
 
 exports.handler = async (event, context) => {
   // Only allow POST
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: "Method Not Allowed" };
   }
+
+  console.log(`going to call ${INTERCOM_CONTACT_API}`)
 
   const formemail = JSON.parse(event.body).payload.email;
   const formname = JSON.parse(event.body).payload.name;
