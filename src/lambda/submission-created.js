@@ -12,7 +12,8 @@ exports.handler = async (event, context) => {
 
   console.log(`serverless function running now`);
 
-  const email = JSON.parse(event.body).payload.email;
+  //const email = JSON.parse(event.body).payload.email;
+  const email = "berau@atsx.io"
 
   console.log(`Received a submission: ${email}`)
 
@@ -28,7 +29,7 @@ exports.handler = async (event, context) => {
             "type": "user",
             "id": email
           },
-          "body": "I just submitted the contact form from the Stax website"
+          "body": "I just submitted a form from another site partyparty"
         })
     }
     .then(response => response.json())
