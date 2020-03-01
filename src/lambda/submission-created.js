@@ -14,16 +14,17 @@ exports.handler = async (event, context) => {
 
   const formemail = JSON.parse(event.body).payload.email;
   const formname = JSON.parse(event.body).payload.name;
-  const email = "midnightemail@blah.blah"
+  const formcompany = JSON.parse(event.body).payload.company
 
   // need to find the Intercom generated ID for the contact, so we can create a conversation on behalf of that user
+  // we only have their email to work with
   const INTERCOM_SEARCH_FIELD = "email"
   const INTERCOM_SEARCH_OPERATOR = "="
   const intercom_search_request = {
      "query":  {
         "field": INTERCOM_SEARCH_FIELD,
         "operator": INTERCOM_SEARCH_OPERATOR,
-        "value": email
+        "value": formemail
       }
     }
 
@@ -52,7 +53,7 @@ exports.handler = async (event, context) => {
                 "type": "user",
                 "id": data.data[0].id
               },
-            "body": `I submitted the Contact form via stax.io`
+            "body": `I submitted the Contact form via stax.io with the following details\nName: ${ formname }\nEmail: ${ formemail }\nCompany: ${ formcompany }`
             }
 
       console.log(`going to create an intercom conversation now`);
@@ -71,9 +72,7 @@ exports.handler = async (event, context) => {
       }
       catch (e) {
         console.log(String(e))
-
       }
-
     }
     else {
       // do we want to create a conversation anyway if we couldn't find a matching user to the email
@@ -89,7 +88,7 @@ exports.handler = async (event, context) => {
     console.log(e);
     return {
       statusCode: 500,
-      body: JSON.stringify({ msg: e.message }), // Could be a custom message or object i.e. JSON.stringify(err)
+      body: JSON.stringify({ msg: e.message }),
     };
   }
 
