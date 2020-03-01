@@ -40,7 +40,7 @@ exports.handler = async (event, context) => {
           );
 
     const data = await response.json();
-    console.log(`got back ${ response.status }`)
+    console.log(`got back ${ JSON.stringify(response) }`)
 
     if (!response.ok) { //problem contacting intercom API
       console.log(response.text())
