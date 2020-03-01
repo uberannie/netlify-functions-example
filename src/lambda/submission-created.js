@@ -42,27 +42,37 @@ exports.handler = async (event, context) => {
       }
     }
 
-  const intercom_user = async () => {
-    try {
+    try{
       const response = await fetch(INTERCOM_SEARCH_CONTACT_API, {
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${API_TOKEN}`,
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'},
-          body: JSON.stringify(intercom_search_request) }
-        );
-        const intercomresponse = await response.json();
-        console.log(intercomresponse);
+              method: 'POST',
+              headers: {
+                Authorization: `Bearer ${API_TOKEN}`,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'},
+              body: JSON.stringify(intercom_search_request) }
+            );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        // NOT res.status >= 200 && res.status < 300
+        return { statusCode: data.status, body: data.detail };
+      }
+      console.log(JSON.stringify(data));
+
+      return {
+        statusCode: 200,
+        body: JSON.stringify(data)
+      }
     }
     catch (e) {
-      console.log(String(error))
+      console.log(e);
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ msg: e.message }), // Could be a custom message or object i.e. JSON.stringify(err)
+      };
     }
-
-  }
-
-  intercom_user();
 
 
 
