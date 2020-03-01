@@ -43,8 +43,7 @@ exports.handler = async (event, context) => {
 
     if (!response.ok) {
       // NOT res.status >= 200 && res.status < 300
-      //return { statusCode: data.status, body: data.detail };
-      // do something
+      console.log(data.detail)
     }
 
     // we found a match to create the conversation for
@@ -80,19 +79,9 @@ exports.handler = async (event, context) => {
       console.log(`could not create conversation for ${ formemail }`)
     }
 
-/* is this needed ?
-    return {
-      statusCode: 200
-    }
-*/
   }
   catch (e) {
-    console.log(e);
-    /*
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ msg: e.message }),
-    };
-    */
+    console.log(String(e));
+
   }
 }
