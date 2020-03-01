@@ -55,15 +55,34 @@ exports.handler = async (event, context) => {
             "body": `I submitted the Contact form via stax.io`
             }
 
-      console.log(JSON.stringify(intercom_conversation));
+      console.log(`going to create an intercom conversation now`);
+
+      try {
+        const response = await fetch(INTERCOM_CONVERSATION_API, {
+            method: 'POST',
+            headers: {
+              Authorization: `Bearer ${API_TOKEN}`,
+              'Accept': 'application/json',
+              'Content-Type': 'application/json' },
+            body: JSON.stringify(intercom_conversation) }
+            )
+          const data = await response.json();
+          console.log(`created message ${data.id}`)
+      }
+      catch (e) {
+        console.log(String(e))
+
+      }
+
     }
     else {
-      // do we want to create a conversation anyway for a default user?
+      // do we want to create a conversation anyway if we couldn't find a matching user to the email
+      console.log(`could not create conversation for ${ formemail }`)
     }
 
     return {
       statusCode: 200,
-      body: JSON.stringify(data)
+      body: `Successfully created Intercom conversation for ${ formemail }`
     }
   }
   catch (e) {
@@ -73,36 +92,5 @@ exports.handler = async (event, context) => {
       body: JSON.stringify({ msg: e.message }), // Could be a custom message or object i.e. JSON.stringify(err)
     };
   }
-
-
-
-/*
-  return fetch(INTERCOM_CONVERSATION_API, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${API_TOKEN}`,
-        'Accept': 'application/json',
-        'Content-Type': 'application/json' },
-      body: JSON.stringify(intercom_conversation) }
-      )
-    .then(response => response.json())
-    .then(data => {console.log(`we got back created_at: ${data.created_at} id: ${data.id}`)})
-
-    .catch(error => { console.log(String(error)) })
-*/
-/*
-return fetch(INTERCOM_CONTACT_API, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${API_TOKEN}`,
-      'Accept': 'application/json',
-      'Content-Type': 'application/json' },
-    body: JSON.stringify(intercom_contact) }
-    )
-  .then(response => response.json())
-  .then(data => {console.log(`we got back ${data.type} ${data.id}`)})
-
-  .catch(error => { console.log(String(error)) })
-  */
 
 }
