@@ -50,7 +50,7 @@ exports.handler = async (event, context) => {
       const intercom_conversation = {
             "from": {
                 "type": "user",
-                "id": data[0].id
+                "id": data.data[0].id
               },
             "body": `I submitted the Contact form via stax.io`
             }
