@@ -56,15 +56,14 @@ exports.handler = async (event, context) => {
           console.log(response.json())
         })
         .then(data => {
-            console.log(JSON.stringify(data))
+            return data;
+            //console.log(JSON.stringify(data))
           }
         )
         .catch(error => { console.log(String(error)) })
   }
-
-
-
-  console.log(JSON.stringify(intercom_search_request))
+  
+  console.log(JSON.stringify(intercom_user))
 
 
 
