@@ -43,7 +43,8 @@ exports.handler = async (event, context) => {
 
     if (!response.ok) {
       // NOT res.status >= 200 && res.status < 300
-      return { statusCode: data.status, body: data.detail };
+      //return { statusCode: data.status, body: data.detail };
+      // do something
     }
 
     // we found a match to create the conversation for
@@ -53,7 +54,7 @@ exports.handler = async (event, context) => {
                 "type": "user",
                 "id": data.data[0].id
               },
-            "body": `I submitted the Contact form via stax.io with the following details\nName: ${ formname }\nEmail: ${ formemail }\nCompany: ${ formcompany }`
+            "body": `I submitted the Contact form via stax.io with the following details\n\nName: ${ formname }\nEmail: ${ formemail }\nCompany: ${ formcompany }`
             }
 
       console.log(`going to create an intercom conversation now`);
@@ -68,7 +69,7 @@ exports.handler = async (event, context) => {
             body: JSON.stringify(intercom_conversation) }
             )
           const data = await response.json();
-          console.log(`created message ${data.id}`)
+          console.log(`created conversation ${data.id} for ${ formemail }`)
       }
       catch (e) {
         console.log(String(e))
@@ -79,17 +80,19 @@ exports.handler = async (event, context) => {
       console.log(`could not create conversation for ${ formemail }`)
     }
 
+/* is this needed ?
     return {
-      statusCode: 200,
-      body: `Successfully created Intercom conversation for ${ formemail }`
+      statusCode: 200
     }
+*/
   }
   catch (e) {
     console.log(e);
+    /*
     return {
       statusCode: 500,
       body: JSON.stringify({ msg: e.message }),
     };
+    */
   }
-
 }
