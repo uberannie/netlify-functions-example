@@ -40,10 +40,11 @@ exports.handler = async (event, context) => {
           );
 
     const data = await response.json();
+    console.log(`got back ${ response.status }`)
 
-    if (!response.ok) {
-      // NOT res.status >= 200 && res.status < 300
-      console.log(data.detail)
+    if (!response.ok) { //problem contacting intercom API
+      console.log(response.text())
+      return;
     }
 
     // we found a match to create the conversation for
