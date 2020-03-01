@@ -59,12 +59,11 @@ exports.handler = async (event, context) => {
         console.log(response.json())
       })
       .then(data => {
-          console.log(JSON.stringify(data))
+          console.log('did i get a response?')
         }
       )
       .catch(error => { console.log(String(error)) })
 
-  //console.log(JSON.stringify(intercom_conversation))
 /*
   return fetch(INTERCOM_CONVERSATION_API, {
       method: 'POST',
