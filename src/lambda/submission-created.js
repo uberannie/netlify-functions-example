@@ -43,27 +43,26 @@ exports.handler = async (event, context) => {
     }
 
   const intercom_user = async () => {
-    fetch(INTERCOM_SEARCH_CONTACT_API, {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${API_TOKEN}`,
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'},
-        body: JSON.stringify(intercom_search_request) }
-        )
-        .then(response => {
-          console.log(response.json())
-        })
-        .then(data => {
-            return data;
-            //console.log(JSON.stringify(data))
-          }
-        )
-        .catch(error => { console.log(String(error)) })
+    try {
+      const response = await fetch(INTERCOM_SEARCH_CONTACT_API, {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${API_TOKEN}`,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'},
+          body: JSON.stringify(intercom_search_request) }
+        );
+        const intercomresponse = await response.json();
+        console.log(intercomresponse);
+    }
+    catch (e) {
+      console.log(String(error))
+    }
+
   }
-  
-  console.log(JSON.stringify(intercom_user))
+
+  intercom_user();
 
 
 
