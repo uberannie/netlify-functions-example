@@ -1,5 +1,5 @@
 import fetch from "node-fetch";
-import querystring from "querystring";
+/*import querystring from "querystring";*/
 
 const { API_TOKEN } = process.env
 const INTERCOM_CONVERSATION_API = `${process.env.INTERCOM_API}/conversations`
@@ -12,11 +12,17 @@ exports.handler = async (event, context) => {
     return { statusCode: 405, body: "Method Not Allowed" };
   }
 
+/*
   const params = querystring.parse(event.body);
 
   const formemail = params.email || "no email found"
   const formname = params.name || "no name found"
   const formcompany = params.company || "no company found"
+
+*/
+  const formemail = JSON.parse(event.body).payload.email;
+  const formname = JSON.parse(event.body).payload.name;
+  const formcompany = JSON.parse(event.body).payload.company;
 
   // need to find the Intercom generated ID for the contact, so we can create a conversation on behalf of that user
   // we only have their email to work with
@@ -56,7 +62,7 @@ exports.handler = async (event, context) => {
               "body": `I submitted the Contact form via stax.io with the following details\n\nName: ${ formname }\nEmail: ${ formemail }\nCompany: ${ formcompany }`
               }
 
-        console.log(`going to create an intercom conversation now`);
+        console.log(`going to create an intercom conversation now for ${ formemail }`);
 
         const conversationresponse = await fetch(INTERCOM_CONVERSATION_API, {
             method: 'POST',
