@@ -44,7 +44,7 @@ exports.handler = async (event, context) => {
       }
     }
 
-    console.log(JSON.stringify(intercom_search_request))
+  console.log(JSON.stringify(intercom_search_request))
 
   return fetch(INTERCOM_SEARCH_CONTACT_API, {
       method: 'POST',
@@ -55,9 +55,11 @@ exports.handler = async (event, context) => {
         'Accept': 'application/json'},
       body: JSON.stringify(intercom_search_request) }
       )
-      .then(response => response.json())
+      .then(response => {
+        console.log(response.json())
+      })
       .then(data => {
-          console.log(data.data["id"])
+          console.log(JSON.stringify(data))
         }
       )
       .catch(error => { console.log(String(error)) })
