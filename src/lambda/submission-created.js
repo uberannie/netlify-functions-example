@@ -34,8 +34,6 @@ exports.handler = async (event, context) => {
 
   const INTERCOM_SEARCH_FIELD = "email"
   const INTERCOM_SEARCH_OPERATOR = "="
-  const intercom_user = ""
-
   const intercom_search_request = {
      "query":  {
         "field": INTERCOM_SEARCH_FIELD,
@@ -44,25 +42,31 @@ exports.handler = async (event, context) => {
       }
     }
 
+  const intercom_user = async () => {
+    fetch(INTERCOM_SEARCH_CONTACT_API, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${API_TOKEN}`,
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'},
+        body: JSON.stringify(intercom_search_request) }
+        )
+        .then(response => {
+          console.log(response.json())
+        })
+        .then(data => {
+            console.log(JSON.stringify(data))
+          }
+        )
+        .catch(error => { console.log(String(error)) })
+  }
+
+
+
   console.log(JSON.stringify(intercom_search_request))
 
-  return fetch(INTERCOM_SEARCH_CONTACT_API, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${API_TOKEN}`,
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'},
-      body: JSON.stringify(intercom_search_request) }
-      )
-      .then(response => {
-        console.log(response.json())
-      })
-      .then(data => {
-          console.log('did i get a response?')
-        }
-      )
-      .catch(error => { console.log(String(error)) })
+
 
 /*
   return fetch(INTERCOM_CONVERSATION_API, {
