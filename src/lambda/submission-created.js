@@ -1,7 +1,7 @@
 import fetch from "node-fetch";
 import querystring from "query-string";
 
-const { INTERCOM_API_TOKEN } = process.env
+const { INTERCOM_API_TOKEN } = process.env.INTERCOM_API_TOKEN
 const INTERCOM_CONVERSATION_API = `${process.env.INTERCOM_API_URL}/conversations`
 const INTERCOM_CONTACT_API = `${process.env.INTERCOM_API_URL}/contacts`
 const INTERCOM_SEARCH_CONTACT_API = INTERCOM_CONTACT_API.concat("/search")
@@ -32,7 +32,7 @@ exports.handler = async (event, context) => {
       const createcontactresponse = await fetch(INTERCOM_CONTACT_API, {
                 method: 'POST',
                 headers: {
-                  Authorization: `Bearer ${API_TOKEN}`,
+                  Authorization: `Bearer ${INTERCOM_API_TOKEN}`,
                   'Accept': 'application/json',
                   'Content-Type': 'application/json' },
                 body: JSON.stringify(intercom_create_contact)
@@ -55,7 +55,7 @@ exports.handler = async (event, context) => {
           const searchcontactresponse = await fetch(INTERCOM_SEARCH_CONTACT_API, {
                   method: 'POST',
                   headers: {
-                    Authorization: `Bearer ${API_TOKEN}`,
+                    Authorization: `Bearer ${INTERCOM_API_TOKEN}`,
                     'Content-Type': 'application/json',
                     'Accept': 'application/json'},
                   body: JSON.stringify(intercom_search_request) }
