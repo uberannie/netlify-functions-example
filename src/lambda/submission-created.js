@@ -15,6 +15,10 @@ exports.handler = async (event, context) => {
     try {
 
       const params = querystring.parse(event.body);
+
+      console.log(event.body)
+      console.log(params)
+
       let intercom_user_id = ""
 
       // Need the Intercom user ID
