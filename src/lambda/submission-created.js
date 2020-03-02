@@ -15,8 +15,6 @@ exports.handler = async (event, context) => {
 
       const params = JSON.parse(event.body).payload;
 
-      console.log(params)
-
       let intercom_user_id = ""
 
       // Need the Intercom user ID
@@ -54,6 +52,8 @@ exports.handler = async (event, context) => {
               }
             }
 
+          console.log(intercom_search_request)
+
           const searchcontactresponse = await fetch(INTERCOM_SEARCH_CONTACT_API, {
                   method: 'POST',
                   headers: {
@@ -64,6 +64,7 @@ exports.handler = async (event, context) => {
                 );
           const searchdata = await searchcontactresponse.json();
 
+          // if there was an error returned searching or no search results found
           if(searchdata.errors || searchdata.total_count == 0) {
             throw (JSON.stringify(searchdata))
           }
