@@ -1,9 +1,9 @@
 import fetch from "node-fetch";
 import querystring from "query-string";
 
-const { API_TOKEN } = process.env
-const INTERCOM_CONVERSATION_API = `${process.env.INTERCOM_API}/conversations`
-const INTERCOM_CONTACT_API = `${process.env.INTERCOM_API}/contacts`
+const { INTERCOM_API_TOKEN } = process.env
+const INTERCOM_CONVERSATION_API = `${process.env.INTERCOM_API_URL}/conversations`
+const INTERCOM_CONTACT_API = `${process.env.INTERCOM_API_URL}/contacts`
 const INTERCOM_SEARCH_CONTACT_API = INTERCOM_CONTACT_API.concat("/search")
 
 exports.handler = async (event, context) => {
