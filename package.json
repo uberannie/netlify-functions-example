@@ -32,6 +32,8 @@
   },
   "dependencies": {
     "encoding": "^0.1.12",
-    "normalize.css": "^8.0.0"
+    "isomorphic-fetch": "^2.2.1",
+    "normalize.css": "^8.0.0",
+    "query-string": "^6.11.0"
   }
 }
