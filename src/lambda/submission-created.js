@@ -13,7 +13,9 @@ exports.handler = async (event, context) => {
 
     try {
 
-      const params = JSON.parse(event.body);
+      const params = JSON.parse(event.body).payload;
+
+      console.log(params)
 
       let intercom_user_id = ""
 
