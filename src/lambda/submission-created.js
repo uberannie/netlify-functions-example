@@ -52,8 +52,6 @@ exports.handler = async (event, context) => {
               }
             }
 
-          console.log(intercom_search_request)
-
           const searchcontactresponse = await fetch(INTERCOM_SEARCH_CONTACT_API, {
                   method: 'POST',
                   headers: {
