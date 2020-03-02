@@ -1,5 +1,4 @@
 import fetch from "node-fetch";
-import querystring from "query-string";
 
 const { INTERCOM_API_TOKEN } = process.env
 const INTERCOM_CONVERSATION_API = `${process.env.INTERCOM_API_URL}/conversations`
@@ -14,10 +13,7 @@ exports.handler = async (event, context) => {
 
     try {
 
-      const params = querystring.parse(event.body);
-
-      console.log(event.body)
-      console.log(params)
+      const params = JSON.parse(event.body);
 
       let intercom_user_id = ""
 
