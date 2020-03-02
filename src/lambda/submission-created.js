@@ -1,4 +1,4 @@
-import fetch from "node-fetch";
+import fetch from "isomorphic-fetch";
 
 const { INTERCOM_API_TOKEN } = process.env
 const INTERCOM_CONVERSATION_API = `${process.env.INTERCOM_API_URL}/conversations`
