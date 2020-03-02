@@ -77,7 +77,7 @@ exports.handler = async (event, context) => {
           break;
         }
         default: {  // some other problem trying to create contact
-          console.log(`${intercom_create_contact} ${INTERCOM_CONTACT_API} ${INTERCOM_API_TOKEN}`)
+          console.log(`${JSON.stringify(intercom_create_contact)} ${INTERCOM_CONTACT_API} ${INTERCOM_API_TOKEN}`)
           throw (`${ createcontactresponse.status } returned trying to create contact`)
           break;
         }
